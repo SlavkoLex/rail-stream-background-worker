@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.railsoft.entities.RowDataDeviceEntity;
+import com.railsoft.repository.entities.RowDataDeviceEntity;
 import com.railsoft.repository.rowMappers.RowDataDeviceRowMapper;
 
 

@@ -6,8 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import com.railsoft.repository.DeviceRepository;
-import com.railsoft.repository.RowDataDeviceRepository;
+import com.railsoft.controllers.RowDataDeviceResource;
 
 
 @SpringBootApplication
@@ -19,14 +18,13 @@ public class Application implements CommandLineRunner{
     @Override
     public void run(String... args){
 
-        // Test run
-
-        DeviceRepository tdsObj = applicationContext.getBean(DeviceRepository.class);
-        RowDataDeviceRepository tdsObj2 = applicationContext.getBean(RowDataDeviceRepository.class);
+        CoAPServerRepresentative serverRepresentative = applicationContext.getBean(CoAPServerRepresentative.class);
+        RowDataDeviceResource coapResource = applicationContext.getBean(RowDataDeviceResource.class);
         
-        System.out.println(tdsObj.findDeviceByID(1));
-        System.out.println(tdsObj2.findRowDeviceDataByDeviceId(1));
+        serverRepresentative.registeringResource(coapResource);
+        serverRepresentative.startServer();
 
+        System.out.println("----------CoAP Server is running!");
     }
 
     public static void main(String[] args){

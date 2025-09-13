@@ -3,7 +3,7 @@ package com.railsoft.repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.railsoft.entities.DeviceEntity;
+import com.railsoft.repository.entities.DeviceEntity;
 import com.railsoft.repository.rowMappers.DevisceRowMapper;
 
 @Repository

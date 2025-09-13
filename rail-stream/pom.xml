@@ -16,8 +16,6 @@
         <release>23</release>
     </properties>
 
-<!-- ADD CoAP Dep-s -->
-
     <dependencies>
 
         <!-- Spring Base -->
@@ -27,11 +25,31 @@
             <version>${starter.version}</version>
         </dependency>
 
-        <!-- Logging -->
-        <dependency>
+        <!-- Spring Logging -->
+        <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
             <version>${starter.version}</version>
+        </dependency> -->
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.18</version>
+        </dependency>
+
+        <!-- CoAP -->
+        <dependency>
+            <groupId>org.eclipse.californium</groupId>
+            <artifactId>californium-core</artifactId>
+            <version>4.0.0-M6</version>
+        </dependency>
+
+        <!-- CBOR -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-cbor</artifactId>
+            <version>2.20.0</version>
         </dependency>
 
         <!-- JDBC + HikariCP -->

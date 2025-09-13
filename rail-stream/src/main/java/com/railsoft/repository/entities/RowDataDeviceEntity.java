@@ -1,4 +1,4 @@
-package com.railsoft.entities;
+package com.railsoft.repository.entities;
 
 import java.time.LocalDateTime;
 

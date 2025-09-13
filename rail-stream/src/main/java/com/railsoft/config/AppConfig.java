@@ -4,6 +4,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 import javax.sql.DataSource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.cbor.CBORFactory;
+
+import org.eclipse.californium.core.CoapServer;
+import org.eclipse.californium.core.config.CoapConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -39,6 +44,34 @@ public class AppConfig {
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
+    }
+
+    @Bean 
+    public ObjectMapper objectMapper(){
+        return new ObjectMapper(new CBORFactory());
+    }
+
+    @Bean
+    public org.eclipse.californium.elements.config.Configuration coapConfs(){
+
+        org.eclipse.californium.elements.config.Configuration serverConf = 
+        org.eclipse.californium.elements.config.Configuration.createStandardWithoutFile();
+
+        serverConf.set(CoapConfig.COAP_PORT, 5683);
+        serverConf.set(CoapConfig.COAP_SECURE_PORT, 5684);
+        serverConf.set(CoapConfig.MAX_MESSAGE_SIZE, 4096);
+        serverConf.set(CoapConfig.MAX_RETRANSMIT, 4);
+        serverConf.set(CoapConfig.MAX_ACTIVE_PEERS, 150000);
+
+        return serverConf;
+    }
+
+    @Bean
+    public CoapServer coapServer(org.eclipse.californium.elements.config.Configuration confs){
+
+        CoapServer server =  new CoapServer(confs);
+        return server;
+    
     }
 
 }

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.NonNull;
 
-import com.railsoft.entities.DeviceEntity;
+import com.railsoft.repository.entities.DeviceEntity;
 
 
 public class DevisceRowMapper implements RowMapper<DeviceEntity>{
