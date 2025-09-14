@@ -19,12 +19,19 @@ public class RowDataDeviceResource extends CoapResource{
         this.parcerDeviceData = parcerDeviceData;
     }
 
+    // Отклик о доступности сервиса
+    @Override
+    public void handleGET(CoapExchange exchange){
+        exchange.respond("Hello from CoAP Java!");
+    }
+
     @Override
     public void handlePOST(CoapExchange exchange){
 
-        // Обработка binaryData через CBORParser
+        // Сырые данные CBOR
         byte[] binaryData = exchange.getRequestPayload();
-
+        
+        // Десериализация данных в Объект (Может возникнуть проблема с десериализацией Timestamp т.к. ключу присвоено значение массива со значениями)
         try{
 
             RowDataDeviceEntity rowDeviceData = parcerDeviceData.parseRowDataFromDevice(binaryData);

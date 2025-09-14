@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 
 import com.railsoft.controllers.RowDataDeviceResource;
 
-
 @SpringBootApplication
 public class Application implements CommandLineRunner{
 
@@ -22,9 +21,11 @@ public class Application implements CommandLineRunner{
         RowDataDeviceResource coapResource = applicationContext.getBean(RowDataDeviceResource.class);
         
         serverRepresentative.registeringResource(coapResource);
+        serverRepresentative.setEndpoint();
         serverRepresentative.startServer();
 
         System.out.println("----------CoAP Server is running!");
+
     }
 
     public static void main(String[] args){

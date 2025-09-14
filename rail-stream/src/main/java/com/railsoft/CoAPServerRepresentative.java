@@ -6,20 +6,29 @@ import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.CoapServer;
 import org.springframework.stereotype.Component;
 
+import org.eclipse.californium.core.network.Endpoint;
+import org.eclipse.californium.core.network.CoapEndpoint;
+
 
 @Component
 public class CoAPServerRepresentative {
 
     private CoapServer server;
     
+    private CoapEndpoint endpont;
 
-    CoAPServerRepresentative(CoapServer server){
+    CoAPServerRepresentative(CoapServer server, CoapEndpoint endpont){
         this.server = server;
+        this.endpont = endpont;
     }
 
 
     public void registeringResource(CoapResource coapResource){
         server.add(coapResource);
+    }
+
+    public void setEndpoint(){
+        server.addEndpoint(endpont);
     }
 
     public void registeringCoupleResources(List<CoapResource> coapResourceList){
@@ -29,6 +38,10 @@ public class CoAPServerRepresentative {
     }
 
     public void startServer(){
+        System.out.println("------------------CoAP Server started on:---------------------");
+        for (Endpoint endpoint : server.getEndpoints()) {
+            System.out.println(" -------------" + endpoint.getAddress());
+        }
         server.start();
     }
     
