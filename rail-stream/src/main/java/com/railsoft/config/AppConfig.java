@@ -53,7 +53,8 @@ public class AppConfig {
 
     @Bean 
     public ObjectMapper objectMapper(){
-        return new ObjectMapper(new CBORFactory());
+        ObjectMapper mapper = new ObjectMapper(new CBORFactory());
+        return mapper;
     }
 
 

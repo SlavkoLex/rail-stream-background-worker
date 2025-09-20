@@ -5,13 +5,12 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
 import com.railsoft.repository.entities.DeviceEntity;
 
-
+@Component
 public class DevisceRowMapper implements RowMapper<DeviceEntity>{
-
-    //!!!!!!!!! TODO: Оформить в фал .properties наименование колонок БД!!!!!!!!!!!
 
     @Override
     public DeviceEntity mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {

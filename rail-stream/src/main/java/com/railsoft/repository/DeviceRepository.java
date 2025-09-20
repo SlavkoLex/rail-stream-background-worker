@@ -9,12 +9,13 @@ import com.railsoft.repository.rowMappers.DevisceRowMapper;
 @Repository
 public class DeviceRepository {
  
-    // TODO: Реализовать инъекцию объекта RowMapper
+    private DevisceRowMapper devisceRowMapper;
 
     private JdbcTemplate jdbcTemplate;
 
-    public DeviceRepository(JdbcTemplate jdbcTemplate){
+    public DeviceRepository(JdbcTemplate jdbcTemplate, DevisceRowMapper devisceRowMapper){
         this.jdbcTemplate = jdbcTemplate;
+        this.devisceRowMapper = devisceRowMapper;
 
     }
 
@@ -22,16 +23,16 @@ public class DeviceRepository {
 
         String sqlQuery = "SELECT * FROM devices WHERE device_id = ?";
 
-        return jdbcTemplate.queryForObject(sqlQuery, new DevisceRowMapper(), recordId);
+        return jdbcTemplate.queryForObject(sqlQuery, devisceRowMapper, recordId);
 
   
     }
 
     public DeviceEntity findDeviceByDeviceName(String deviceName){
 
-        String sqlQuery = "SELECT * FROM devices WHERE device_id = ?";
+        String sqlQuery = "SELECT * FROM devices WHERE device_name = ?";
 
-        return jdbcTemplate.queryForObject(sqlQuery, new DevisceRowMapper(), deviceName);
+        return jdbcTemplate.queryForObject(sqlQuery, devisceRowMapper, deviceName);
 
     }
     

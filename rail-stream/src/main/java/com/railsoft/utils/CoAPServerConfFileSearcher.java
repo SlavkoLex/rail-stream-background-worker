@@ -1,4 +1,4 @@
-package com.railsoft.util;
+package com.railsoft.utils;
 
 import java.io.File;
 import java.io.IOException;

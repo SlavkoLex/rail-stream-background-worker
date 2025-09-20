@@ -25,13 +25,7 @@
             <version>${starter.version}</version>
         </dependency>
 
-        <!-- Spring Logging -->
-        <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
-            <version>${starter.version}</version>
-        </dependency> -->
-
+        <!-- Logging -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>

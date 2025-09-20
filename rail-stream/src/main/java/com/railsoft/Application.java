@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import com.railsoft.controllers.RowDataDeviceResource;
+import com.railsoft.resources.RowDataDeviceResource;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner{
