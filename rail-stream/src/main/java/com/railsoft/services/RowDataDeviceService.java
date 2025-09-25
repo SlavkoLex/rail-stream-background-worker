@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.railsoft.repository.DeviceRepository;
 import com.railsoft.repository.RowDataDeviceRepository;
+import com.railsoft.repository.entities.Device;
 import com.railsoft.repository.entities.RowDataDeviceEntity;
 
 
@@ -21,14 +22,25 @@ public class RowDataDeviceService {
 
     public void enterRowDeviceDataForDevice(RowDataDeviceEntity rowDataDevice){ // - Внесения данных полученных от конкретного устройства
 
-        // TODO: 1.Проверить наличие зарегистрированного устройства в БД
-        // 2. Устройство найдено: Сохранить данные
-        // 3. Устройство не найдено:  Генерировать Exception
-        
-        // Отклонить запрос (Не возвращать ответ т.к. данный сервис работает только с устройствами. 
-        // Информацию об отклонении запроса с указанием причины сохранять в лог)
+        String deviceName = rowDataDevice.getDeviceName();
+        boolean status = deviceRepository.findDeviceByDeviceName(deviceName).deviceIsNull();
+
+        // TODO: Реализовать занесение в Лог Информации о "Не сохранении данных! в виде RowDataDeviceNullEntity объекта" 
+        if(status){
+            System.out.println("The data has not been saved! " + Boolean.toString(status));
+            System.out.println(rowDataDevice);
+        }else{
+            // TODO: Реализовать обработку Ошибки при внесении данных
+            rowDataDeviceRepository.addRowDataDevice(rowDataDevice);
+        }
+   
 
 
 
+    }
+
+    public void getInfoAboutDevice(String deviceName){
+        Device device = deviceRepository.findDeviceByDeviceName(deviceName);
+        System.out.println(device);
     }
 }

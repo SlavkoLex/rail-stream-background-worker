@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @JsonIgnoreProperties({"rowDeviceDataId"})
-public class RowDataDeviceEntity {
+public class RowDataDeviceEntity implements RowDataDevice{
 
 
     private Long rowDeviceDataId;
 
-    @JsonProperty("device_id")
-    private Long deviceId;
+    @JsonProperty("device_name")
+    private String deviceName;
 
     @JsonProperty("train_data_timestamp_input")
     private int[] trainDataTimestampInput;
@@ -41,13 +41,17 @@ public class RowDataDeviceEntity {
 
     public RowDataDeviceEntity(){}
 
+    public boolean rowDataDeviceIsNull(){
+        return false;
+    }
+
     public Long getRowDeviceDataId(){return rowDeviceDataId;}
-    public Long getDeviceId(){return deviceId;}
+    public String getDeviceName(){return deviceName;}
     public int[] getTrainDataTimestampInput(){return trainDataTimestampInput;}
 
     public LocalDateTime getTrainDataTimestampInputInLocalDateTime(){
 
-        if(this.trainDataTimestampOutput[0] == 0){
+        if(this.trainDataTimestampInput[0] == 0){
             // Return LocalDate object with minimal values
             return LocalDateTime.of(0, 1, 1, 0, 0, 0);
         }
@@ -90,7 +94,7 @@ public class RowDataDeviceEntity {
 
 
     public void setRowDeviceDataId(Long rowDeviceDataId){this.rowDeviceDataId = rowDeviceDataId;}
-    public void setDeviceId(Long deviceId){this.deviceId = deviceId;}
+    public void setDeviceName(String deviceName){this.deviceName = deviceName;}
     public void setStraightTrainDataTimestampInput(int[] trainDataTimestampInput){this.trainDataTimestampInput = trainDataTimestampInput;}
 
     // For CBOR Deserialize
@@ -159,7 +163,7 @@ public class RowDataDeviceEntity {
         String localTrainDataTimestampOutput = this.getTrainDataTimestampOutputInLocalDateTime().toString();
 
         return "{rowDeviceDataId = " + rowDeviceDataId +
-        " deviceId = " + deviceId + 
+        " deviceName = " + deviceName + 
         " trainDataTimestampInput = " + localTrainDataTimestampInput+ 
         " wheelCountRailInput = " + wheelCountRailInput +
         " wheelSpeedRailInput = " + wheelSpeedRailInput + 

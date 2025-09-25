@@ -43,10 +43,10 @@ public class RowDataDeviceRepository {
     // TODO: Проверить работу метода по внесению данных в БД
     public void addRowDataDevice(RowDataDeviceEntity rowDataDevice){
         String sqlQuery = "INSERT INTO row_device_data (" + 
-            "device_id, " + 
+            "device_name, " + 
             "train_data_timestamp_input, " + 
             "wheel_count_rail_input, " + 
-            "wheel_speed_rail_input " + 
+            "wheel_speed_rail_input, " + 
             "train_data_timestamp_output, " + 
             "wheel_count_rail_output, " + 
             "wheel_speed_rail_output, " + 
@@ -55,11 +55,11 @@ public class RowDataDeviceRepository {
 
         jdbcTemplate.update(
             sqlQuery, 
-            rowDataDevice.getDeviceId(), 
-            rowDataDevice.getTrainDataTimestampInput(), 
+            rowDataDevice.getDeviceName(), 
+            rowDataDevice.getTrainDataTimestampInputInLocalDateTime(), 
             rowDataDevice.getWheelCountRailInput(),
             rowDataDevice.getWheelSpeedRailInput(),
-            rowDataDevice.getTrainDataTimestampOutput(),
+            rowDataDevice.getTrainDataTimestampOutputInLocalDateTime(),
             rowDataDevice.getWheelCountRailOutput(),
             rowDataDevice.getWheelSpeedRailOutput(),
             rowDataDevice.getCommonCountTrainsEnteringRailway(),

@@ -50,8 +50,9 @@ public class RowDataDeviceResource extends CoapResource{
             RowDataDeviceEntity rowDeviceData = parcerDeviceData.parseRowDataFromDevice(bytesFromHex);
             System.out.println(rowDeviceData); // ------TEST_OUT!!
             
-            // -----Работа сервиса после успешной Десериализации------------
+            // -----Работа RowDataDeviceService после успешной Десериализации------------
             rowDataDeviceService.enterRowDeviceDataForDevice(rowDeviceData);
+            
 
         }catch(IOException e){
             // TODO: В случае Exception выполнить метод по Логированию 

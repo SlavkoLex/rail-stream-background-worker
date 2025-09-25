@@ -3,7 +3,9 @@ package com.railsoft.repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.railsoft.repository.entities.Device;
 import com.railsoft.repository.entities.DeviceEntity;
+import com.railsoft.repository.entities.DeviceNullEntity;
 import com.railsoft.repository.rowMappers.DevisceRowMapper;
 
 @Repository
@@ -28,11 +30,16 @@ public class DeviceRepository {
   
     }
 
-    public DeviceEntity findDeviceByDeviceName(String deviceName){
+    public Device findDeviceByDeviceName(String deviceName){
 
         String sqlQuery = "SELECT * FROM devices WHERE device_name = ?";
 
-        return jdbcTemplate.queryForObject(sqlQuery, devisceRowMapper, deviceName);
+        try{
+            return jdbcTemplate.queryForObject(sqlQuery, devisceRowMapper, deviceName);
+        } catch(Exception e){
+            return new DeviceNullEntity();
+
+        }
 
     }
     

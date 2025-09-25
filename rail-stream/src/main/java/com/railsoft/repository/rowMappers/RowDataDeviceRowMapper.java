@@ -17,7 +17,7 @@ public class RowDataDeviceRowMapper implements RowMapper<RowDataDeviceEntity>{
 
         RowDataDeviceEntity rowDeviceData = new RowDataDeviceEntity();
         rowDeviceData.setRowDeviceDataId(rs.getLong("row_device_data_id"));
-        rowDeviceData.setDeviceId(rs.getLong("device_id"));
+        rowDeviceData.setDeviceName(rs.getString("device_name"));
         rowDeviceData.setTrainDataTimestampInputFromLocalDateTime(rs.getTimestamp("train_data_timestamp_input").toLocalDateTime());
         rowDeviceData.setWheelCountRailInput(rs.getInt("wheel_count_rail_input")); 
         rowDeviceData.setWheelSpeedRailInput(rs.getInt("wheel_speed_rail_input"));

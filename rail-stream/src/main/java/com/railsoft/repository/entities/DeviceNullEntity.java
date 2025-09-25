@@ -2,16 +2,16 @@ package com.railsoft.repository.entities;
 
 import java.math.BigDecimal;
 
-public class DeviceEntity implements Device{
-    
+public class DeviceNullEntity implements Device{
+
     private int deviceId;
     private String deviceName;
     private BigDecimal deviceLatitude;
     private BigDecimal deviceLongitude;
 
-    public DeviceEntity(){}
-
-    public boolean deviceIsNull(){return false;}
+    public boolean deviceIsNull(){
+        return true;
+    }
 
     public int getDeviceId(){return this.deviceId;}
     public String getDeviceName(){return this.deviceName;}
@@ -27,10 +27,10 @@ public class DeviceEntity implements Device{
     @Override
     public String toString(){
         return "{deviceId = " + deviceId + 
-        " deviceName = " + deviceName + 
-        " deviceLatitude = " + deviceLatitude + 
-        " deviceLongitude = " + deviceLongitude + "}" ;
+            " deviceName = " + deviceName + 
+            " deviceLatitude = " + deviceLatitude + 
+            " deviceLongitude = " + deviceLongitude + "} => DeviceNullEntity object!" ;
+
     }
-
-
+    
 }
