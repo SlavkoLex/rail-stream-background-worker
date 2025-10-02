@@ -15,11 +15,9 @@ public class CoAPServerRepresentative {
 
     private CoapServer server;
     
-    private CoapEndpoint endpont;
 
-    CoAPServerRepresentative(CoapServer server, CoapEndpoint endpont){
+    CoAPServerRepresentative(CoapServer server){
         this.server = server;
-        this.endpont = endpont;
     }
 
 
@@ -27,7 +25,7 @@ public class CoAPServerRepresentative {
         server.add(coapResource);
     }
 
-    public void setEndpoint(){
+    public void setEndpoint(CoapEndpoint endpont){
         server.addEndpoint(endpont);
     }
 

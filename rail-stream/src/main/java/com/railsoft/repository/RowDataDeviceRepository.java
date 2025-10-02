@@ -40,7 +40,7 @@ public class RowDataDeviceRepository {
         return jdbcTemplate.query(sqlQuery, rowDataDeviceRowMapper, Timestamp.valueOf(trainDataTimestamp));
     }
 
-    // TODO: Проверить работу метода по внесению данных в БД
+
     public void addRowDataDevice(RowDataDeviceEntity rowDataDevice){
         String sqlQuery = "INSERT INTO row_device_data (" + 
             "device_name, " + 

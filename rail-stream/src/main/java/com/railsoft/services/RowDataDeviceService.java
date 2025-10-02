@@ -20,7 +20,7 @@ public class RowDataDeviceService {
         this.deviceRepository = deviceRepository;
     }
 
-    public void enterRowDeviceDataForDevice(RowDataDeviceEntity rowDataDevice){ // - Внесения данных полученных от конкретного устройства
+    public void enterRowDeviceDataForDevice(RowDataDeviceEntity rowDataDevice){
 
         String deviceName = rowDataDevice.getDeviceName();
         boolean status = deviceRepository.findDeviceByDeviceName(deviceName).deviceIsNull();
@@ -33,9 +33,6 @@ public class RowDataDeviceService {
             // TODO: Реализовать обработку Ошибки при внесении данных
             rowDataDeviceRepository.addRowDataDevice(rowDataDevice);
         }
-   
-
-
 
     }
 

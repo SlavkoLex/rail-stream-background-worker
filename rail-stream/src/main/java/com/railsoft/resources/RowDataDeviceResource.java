@@ -43,12 +43,9 @@ public class RowDataDeviceResource extends CoapResource{
         // Сырые данные CBOR
         byte[] bytesFromHex = hexParser.hexToBytes(new String(exchange.getRequestPayload(), StandardCharsets.UTF_8));
 
-        
-        // // Десериализация данных в Объект (Может возникнуть проблема с десериализацией Timestamp т.к. ключу присвоено значение массива со значениями)
         try{
 
             RowDataDeviceEntity rowDeviceData = parcerDeviceData.parseRowDataFromDevice(bytesFromHex);
-            System.out.println(rowDeviceData); // ------TEST_OUT!!
             
             // -----Работа RowDataDeviceService после успешной Десериализации------------
             rowDataDeviceService.enterRowDeviceDataForDevice(rowDeviceData);

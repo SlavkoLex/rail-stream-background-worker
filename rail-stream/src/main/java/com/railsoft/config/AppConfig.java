@@ -64,17 +64,17 @@ public class AppConfig {
         org.eclipse.californium.elements.config.Configuration serverConf = 
         org.eclipse.californium.elements.config.Configuration.createStandardWithoutFile();
 
-        serverConf.set(CoapConfig.MAX_MESSAGE_SIZE, 4096);
-        serverConf.set(CoapConfig.MAX_RETRANSMIT, 4);
-        serverConf.set(CoapConfig.MAX_ACTIVE_PEERS, 150000);
+        serverConf.set(CoapConfig.MAX_MESSAGE_SIZE, Integer.valueOf(env.getProperty("coap.MAX_MESSAGE_SIZE")).intValue());
+        serverConf.set(CoapConfig.MAX_RETRANSMIT, Integer.valueOf(env.getProperty("coap.MAX_RETRANSMIT")).intValue());
+        serverConf.set(CoapConfig.MAX_ACTIVE_PEERS, Integer.valueOf(env.getProperty("coap.MAX_ACTIVE_PEERS")).intValue());
 
         return serverConf;
     }
 
     @Bean
     public CoapEndpoint coapEndpoint(org.eclipse.californium.elements.config.Configuration confs){
+
         CoapEndpoint endpoint = CoapEndpoint.builder()
-            .setConfiguration(confs)
             .setInetSocketAddress(
                 new InetSocketAddress(
                     env.getProperty("coap.listening.address"), 
@@ -82,14 +82,15 @@ public class AppConfig {
                 )
             )
             .build();
-
+        
         return endpoint;
     }
 
     @Bean
-    public CoapServer coapServer(org.eclipse.californium.elements.config.Configuration confs){
+    public CoapServer coapServer(org.eclipse.californium.elements.config.Configuration confs, CoapEndpoint endpont){
 
         CoapServer server =  new CoapServer(confs);
+        server.addEndpoint(endpont);
         return server;
     
     }
