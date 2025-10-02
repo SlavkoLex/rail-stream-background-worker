@@ -8,6 +8,8 @@ import org.eclipse.californium.core.CoapResource;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
 import com.railsoft.repository.entities.RowDataDeviceEntity;
 import com.railsoft.services.RowDataDeviceService;
 import com.railsoft.utils.CBORParserDeviceData;
@@ -37,25 +39,27 @@ public class RowDataDeviceResource extends CoapResource{
         exchange.respond("Hello from CoAP Java!");
     }
 
+    //TODO: Реализовать логирование ошибки при Error-десериализации
     @Override
     public void handlePOST(CoapExchange exchange){
 
-        // Сырые данные CBOR
         byte[] bytesFromHex = hexParser.hexToBytes(new String(exchange.getRequestPayload(), StandardCharsets.UTF_8));
 
         try{
 
             RowDataDeviceEntity rowDeviceData = parcerDeviceData.parseRowDataFromDevice(bytesFromHex);
-            
-            // -----Работа RowDataDeviceService после успешной Десериализации------------
             rowDataDeviceService.enterRowDeviceDataForDevice(rowDeviceData);
             
 
-        }catch(IOException e){
-            // TODO: В случае Exception выполнить метод по Логированию 
-            // (Внесению информации в специальный Erorr POST Log File об некорректном запросе POST с указанием причины) 
-            //кастомного "Обработчика Ошибок Получения Данных От Устройства"  
-            System.err.println(e);
+        }catch(DatabindException databinException){
+            System.out.println("Deserialization error: There may be a field name error");
+            System.err.println(databinException);
+
+        }catch(StreamReadException StreamReadException){
+            System.err.println(StreamReadException);
+            
+        }catch(IOException ioException){
+            System.err.println(ioException);
         }
 
     }

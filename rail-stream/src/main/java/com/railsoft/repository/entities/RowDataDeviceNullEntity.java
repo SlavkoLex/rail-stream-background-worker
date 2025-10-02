@@ -4,9 +4,6 @@ import java.time.LocalDateTime;
 
 public class RowDataDeviceNullEntity implements RowDataDevice{
 
-    private Long rowDeviceDataId;
-
-
     private String deviceName;
 
     private int[] trainDataTimestampInput;
@@ -31,7 +28,32 @@ public class RowDataDeviceNullEntity implements RowDataDevice{
 
 
     private int commonCountTrainWheelsEnteringRailway;
+
+    public RowDataDeviceNullEntity(){}
+
+    public RowDataDeviceNullEntity(
+        String deviceName, 
+        int[] trainDataTimestampInput, 
+        int wheelCountRailInput, 
+        int wheelSpeedRailInput, 
+        int[] trainDataTimestampOutput, 
+        int wheelCountRailOutput, 
+        int wheelSpeedRailOutput, 
+        int commonCountTrainsEnteringRailway, 
+        int commonCountTrainWheelsEnteringRailway
+    ){
+        this.deviceName = deviceName;
+        this.trainDataTimestampInput = trainDataTimestampInput;
+        this.wheelCountRailInput = wheelCountRailInput;
+        this.wheelSpeedRailInput = wheelSpeedRailInput;
+        this.trainDataTimestampOutput = trainDataTimestampOutput;
+        this.wheelCountRailOutput = wheelCountRailOutput;
+        this.wheelSpeedRailOutput = wheelSpeedRailOutput;
+        this.commonCountTrainsEnteringRailway = commonCountTrainsEnteringRailway;
+        this.commonCountTrainWheelsEnteringRailway = commonCountTrainWheelsEnteringRailway;
+    }
     
+    @Override
     public boolean rowDataDeviceIsNull(){
         return true;
     }
@@ -94,7 +116,7 @@ public class RowDataDeviceNullEntity implements RowDataDevice{
 
     public LocalDateTime getTrainDataTimestampInputInLocalDateTime(){
 
-        if(this.trainDataTimestampOutput[0] == 0){
+        if(this.trainDataTimestampInput[0] == 0){
             // Return LocalDate object with minimal values
             return LocalDateTime.of(0, 1, 1, 0, 0, 0);
         }
@@ -109,7 +131,6 @@ public class RowDataDeviceNullEntity implements RowDataDevice{
         );
     }
 
-    public Long getRowDeviceDataId(){return rowDeviceDataId;}
     public String getDeviceName(){return deviceName;}
     public int[] getTrainDataTimestampInput(){return trainDataTimestampInput;}
     public int getWheelCountRailInput(){return wheelCountRailInput;} 
@@ -120,7 +141,6 @@ public class RowDataDeviceNullEntity implements RowDataDevice{
     public int getCommonCountTrainsEnteringRailway(){return commonCountTrainsEnteringRailway;}
     public int getCommonCountTrainWheelsEnteringRailway(){return commonCountTrainWheelsEnteringRailway;}
 
-    public void setRowDeviceDataId(Long rowDeviceDataId){this.rowDeviceDataId = rowDeviceDataId;}
     public void setDeviceName(String deviceName){this.deviceName = deviceName;}
     public void setStraightTrainDataTimestampInput(int[] trainDataTimestampInput){this.trainDataTimestampInput = trainDataTimestampInput;}
     public void setWheelCountRailInput(int wheelCountRailInput){this.wheelCountRailInput = wheelCountRailInput;}
@@ -136,7 +156,7 @@ public class RowDataDeviceNullEntity implements RowDataDevice{
         String localTrainDataTimestampInput = this.getTrainDataTimestampInputInLocalDateTime().toString();
         String localTrainDataTimestampOutput = this.getTrainDataTimestampOutputInLocalDateTime().toString();
 
-        return "{rowDeviceDataId = " + rowDeviceDataId +
+        return "{" +
             " deviceName = " + deviceName + 
             " trainDataTimestampInput = " + localTrainDataTimestampInput+ 
             " wheelCountRailInput = " + wheelCountRailInput +

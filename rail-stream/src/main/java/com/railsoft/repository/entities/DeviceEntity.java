@@ -11,6 +11,19 @@ public class DeviceEntity implements Device{
 
     public DeviceEntity(){}
 
+    public DeviceEntity(
+        int deviceId, 
+        String deviceName, 
+        BigDecimal deviceLatitude, 
+        BigDecimal deviceLongitude
+    ){
+        this.deviceId = deviceId;
+        this.deviceName = deviceName;
+        this.deviceLatitude = deviceLatitude;
+        this.deviceLongitude = deviceLongitude;
+
+    }
+
     public boolean deviceIsNull(){return false;}
 
     public int getDeviceId(){return this.deviceId;}

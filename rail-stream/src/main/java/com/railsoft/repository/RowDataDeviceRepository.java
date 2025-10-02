@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +26,8 @@ public class RowDataDeviceRepository {
         this.rowDataDeviceRowMapper = rowDataDeviceRowMapper;
     }
 
-    public List<RowDataDeviceEntity> findRowDeviceDataByDeviceId(int deviceId){
+    
+    public List<RowDataDeviceEntity> findRowDeviceDataByDeviceId(int deviceId)throws DataAccessException, EmptyResultDataAccessException{
 
 
         String sqlQuery = "SELECT * FROM  row_device_data WHERE device_id = ?";
@@ -33,7 +36,7 @@ public class RowDataDeviceRepository {
         
     }
 
-    public List<RowDataDeviceEntity> findRowDeviceDataForCertainTime(LocalDateTime trainDataTimestamp){
+    public List<RowDataDeviceEntity> findRowDeviceDataForCertainTime(LocalDateTime trainDataTimestamp)throws DataAccessException, EmptyResultDataAccessException{
 
         String sqlQuery = "SELECT * FROM  row_device_data WHERE device_id = ?";
 
@@ -41,7 +44,7 @@ public class RowDataDeviceRepository {
     }
 
 
-    public void addRowDataDevice(RowDataDeviceEntity rowDataDevice){
+    public void addRowDataDevice(RowDataDeviceEntity rowDataDevice) throws DataAccessException{ 
         String sqlQuery = "INSERT INTO row_device_data (" + 
             "device_name, " + 
             "train_data_timestamp_input, " + 

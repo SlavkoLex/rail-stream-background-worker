@@ -41,6 +41,30 @@ public class RowDataDeviceEntity implements RowDataDevice{
 
     public RowDataDeviceEntity(){}
 
+    public RowDataDeviceEntity(
+        Long rowDeviceDataId,
+        String deviceName, 
+        int[] trainDataTimestampInput, 
+        int wheelCountRailInput, 
+        int wheelSpeedRailInput, 
+        int[] trainDataTimestampOutput, 
+        int wheelCountRailOutput, 
+        int wheelSpeedRailOutput, 
+        int commonCountTrainsEnteringRailway, 
+        int commonCountTrainWheelsEnteringRailway
+    ){
+        this.rowDeviceDataId = rowDeviceDataId;
+        this.deviceName = deviceName;
+        this.trainDataTimestampInput = trainDataTimestampInput;
+        this.wheelCountRailInput = wheelCountRailInput;
+        this.wheelSpeedRailInput = wheelSpeedRailInput;
+        this.trainDataTimestampOutput = trainDataTimestampOutput;
+        this.wheelCountRailOutput = wheelCountRailOutput;
+        this.wheelSpeedRailOutput = wheelSpeedRailOutput;
+        this.commonCountTrainsEnteringRailway = commonCountTrainsEnteringRailway;
+        this.commonCountTrainWheelsEnteringRailway = commonCountTrainWheelsEnteringRailway;
+    }
+
     public boolean rowDataDeviceIsNull(){
         return false;
     }
