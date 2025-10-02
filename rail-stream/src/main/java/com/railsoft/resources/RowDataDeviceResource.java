@@ -56,9 +56,11 @@ public class RowDataDeviceResource extends CoapResource{
             System.err.println(databinException);
 
         }catch(StreamReadException StreamReadException){
+            System.out.println("Reading stream problem: Check the data format");
             System.err.println(StreamReadException);
-            
+
         }catch(IOException ioException){
+            System.out.println("Connection error: The error may have occurred when connecting to the ObjectMapper stream");
             System.err.println(ioException);
         }
 
