@@ -11,17 +11,17 @@ import org.eclipse.californium.core.network.CoapEndpoint;
 
 
 @Component
-public class CoAPServerRepresentative {
+public class CoAPServerInteraction {
 
     private CoapServer server;
     
 
-    CoAPServerRepresentative(CoapServer server){
+    CoAPServerInteraction(CoapServer server){
         this.server = server;
     }
 
 
-    public void registeringResource(CoapResource coapResource){
+    public void registeringServlet(CoapResource coapResource){
         server.add(coapResource);
     }
 

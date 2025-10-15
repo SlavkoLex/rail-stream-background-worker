@@ -5,10 +5,15 @@ import org.springframework.context.annotation.ComponentScan;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import javax.sql.DataSource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.cbor.CBORFactory;
+import com.railsoft.utils.SQLQueryLoaderFromFile;
 
 import org.eclipse.californium.core.network.CoapEndpoint;
 import org.eclipse.californium.core.CoapServer;
@@ -22,6 +27,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.zaxxer.hikari.HikariDataSource;
+import com.railsoft.utils.SQLQueryLoader;
+
 
 @Configuration
 @ComponentScan(basePackages = "com.railsoft")
@@ -93,6 +100,39 @@ public class AppConfig {
         server.addEndpoint(endpont);
         return server;
     
+    }
+
+    @Bean
+    public SQLQueryLoader sqlQueryLoaderFromFile(){
+
+        SQLQueryLoader sqlQueryLoaderFromFile = new SQLQueryLoaderFromFile();
+    
+        sqlQueryLoaderFromFile.loadingSQLQueries(getSqlQueryProperties());
+
+        return sqlQueryLoaderFromFile;
+    } 
+
+    public Map<String, Optional<String>> getSqlQueryProperties(){
+
+        String[] queryKeys = {
+            "find.row.device.data.by.device.id", 
+            "find.row.device.data.for.certain.time", 
+            "find.device.by.device.id", 
+            "find.device.by.device.name",
+            "insert.row.device.data",
+            "verify.existance.device"
+        };
+
+        Map<String, Optional<String>> sqlQueryProperties = new HashMap<>();
+
+        for(String key : queryKeys){
+
+            String row = env.getProperty(key);
+            sqlQueryProperties.put(key, Optional.of(row));
+
+        }
+
+        return sqlQueryProperties;
     }
 
 }

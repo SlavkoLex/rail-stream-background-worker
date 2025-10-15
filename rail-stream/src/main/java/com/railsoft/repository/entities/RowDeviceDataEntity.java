@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @JsonIgnoreProperties({"rowDeviceDataId"})
-public class RowDataDeviceEntity implements RowDataDevice{
+public class RowDeviceDataEntity implements RowDeviceData{
 
 
     private Long rowDeviceDataId;
@@ -39,9 +39,9 @@ public class RowDataDeviceEntity implements RowDataDevice{
     @JsonProperty("common_Count_train_wheels_entering_railway")
     private int commonCountTrainWheelsEnteringRailway;
 
-    public RowDataDeviceEntity(){}
+    public RowDeviceDataEntity(){}
 
-    public RowDataDeviceEntity(
+    public RowDeviceDataEntity(
         Long rowDeviceDataId,
         String deviceName, 
         int[] trainDataTimestampInput, 
@@ -65,6 +65,7 @@ public class RowDataDeviceEntity implements RowDataDevice{
         this.commonCountTrainWheelsEnteringRailway = commonCountTrainWheelsEnteringRailway;
     }
 
+    @Override
     public boolean rowDataDeviceIsNull(){
         return false;
     }

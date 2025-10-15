@@ -1,4 +1,4 @@
-package com.railsoft.resources;
+package com.railsoft.servlets;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -10,21 +10,21 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
-import com.railsoft.repository.entities.RowDataDeviceEntity;
-import com.railsoft.services.RowDataDeviceService;
+import com.railsoft.repository.entities.RowDeviceDataEntity;
+import com.railsoft.services.RowDeviceDataService;
 import com.railsoft.utils.CBORParserDeviceData;
 import com.railsoft.utils.HexParser;
 
 @Component
-public class RowDataDeviceResource extends CoapResource{
+public class RowDeviceDataServlet extends CoapResource{
 
     private CBORParserDeviceData parcerDeviceData;
-    private RowDataDeviceService rowDataDeviceService;
+    private RowDeviceDataService rowDataDeviceService;
     private HexParser hexParser;
 
-    public RowDataDeviceResource(
+    public RowDeviceDataServlet(
         CBORParserDeviceData parcerDeviceData, 
-        RowDataDeviceService rowDataDeviceService,
+        RowDeviceDataService rowDataDeviceService,
         HexParser hexParser
     ){
         super("row-device-data");
@@ -33,13 +33,12 @@ public class RowDataDeviceResource extends CoapResource{
         this.hexParser = hexParser;
     }
 
-    // Отклик о доступности сервиса
     @Override
     public void handleGET(CoapExchange exchange){
         exchange.respond("Hello from CoAP Java!");
     }
 
-    //TODO: Реализовать логирование ошибки при Error-десериализации
+    //TODO: Реализовать логирование ошибок
     @Override
     public void handlePOST(CoapExchange exchange){
 
@@ -47,7 +46,7 @@ public class RowDataDeviceResource extends CoapResource{
 
         try{
 
-            RowDataDeviceEntity rowDeviceData = parcerDeviceData.parseRowDataFromDevice(bytesFromHex);
+            RowDeviceDataEntity rowDeviceData = parcerDeviceData.parseRowDataFromDevice(bytesFromHex);
             rowDataDeviceService.enterRowDeviceDataForDevice(rowDeviceData);
             
 
@@ -56,7 +55,7 @@ public class RowDataDeviceResource extends CoapResource{
             System.err.println(databinException);
 
         }catch(StreamReadException StreamReadException){
-            System.out.println("Reading stream problem: Check the data format");
+            System.out.println("Reading stream problem: Check the data");
             System.err.println(StreamReadException);
 
         }catch(IOException ioException){

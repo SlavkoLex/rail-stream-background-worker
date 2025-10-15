@@ -1,0 +1,1 @@
+SELECT EXISTS(SELECT 1 FROM devices WHERE device_name = ?)

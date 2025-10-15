@@ -1,6 +1,6 @@
 package com.railsoft.repository.entities;
 
-public interface RowDataDevice {
+public interface RowDeviceData {
     
     boolean rowDataDeviceIsNull();
 }

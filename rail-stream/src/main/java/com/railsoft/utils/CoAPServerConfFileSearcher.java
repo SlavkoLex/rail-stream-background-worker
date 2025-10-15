@@ -1,3 +1,5 @@
+// NOTE: Use when reading the "application-coap.properties" file  with a full server configuration
+
 package com.railsoft.utils;
 
 import java.io.File;
@@ -9,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-// Use when reading the "application-coap.properties" file  with a full server configuration
 public class CoAPServerConfFileSearcher {
     
     private File serverConfFile;

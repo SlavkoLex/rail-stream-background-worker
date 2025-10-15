@@ -24,6 +24,7 @@ public class DeviceEntity implements Device{
 
     }
 
+    @Override
     public boolean deviceIsNull(){return false;}
 
     public int getDeviceId(){return this.deviceId;}

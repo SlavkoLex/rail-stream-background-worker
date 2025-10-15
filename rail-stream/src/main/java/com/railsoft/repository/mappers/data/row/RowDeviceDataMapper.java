@@ -1,4 +1,4 @@
-package com.railsoft.repository.rowMappers;
+package com.railsoft.repository.mappers.data.row;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,15 +7,15 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
-import com.railsoft.repository.entities.RowDataDeviceEntity;
+import com.railsoft.repository.entities.RowDeviceDataEntity;
 
 @Component
-public class RowDataDeviceRowMapper implements RowMapper<RowDataDeviceEntity>{
+public class RowDeviceDataMapper implements RowMapper<RowDeviceDataEntity>{
 
     @Override
-    public RowDataDeviceEntity mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
+    public RowDeviceDataEntity mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
 
-        RowDataDeviceEntity rowDeviceData = new RowDataDeviceEntity();
+        RowDeviceDataEntity rowDeviceData = new RowDeviceDataEntity();
         rowDeviceData.setRowDeviceDataId(rs.getLong("row_device_data_id"));
         rowDeviceData.setDeviceName(rs.getString("device_name"));
         rowDeviceData.setTrainDataTimestampInputFromLocalDateTime(rs.getTimestamp("train_data_timestamp_input").toLocalDateTime());

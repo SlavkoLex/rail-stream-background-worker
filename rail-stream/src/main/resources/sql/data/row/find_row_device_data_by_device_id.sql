@@ -1,0 +1,1 @@
+SELECT * FROM  row_device_data WHERE device_id = ?

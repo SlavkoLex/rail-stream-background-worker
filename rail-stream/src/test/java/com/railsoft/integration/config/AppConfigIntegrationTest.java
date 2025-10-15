@@ -28,6 +28,10 @@ public class AppConfigIntegrationTest {
     @Autowired
     private Environment env;
 
+    // TODO: Добавить тест проверки наличия в ресурсах каталога sql
+
+    // TODO: Добавить тест проверки наличия необходимых .sql файлов в каталоге sql
+
     @Test
     void propertiesContainsKeysTest(){
 

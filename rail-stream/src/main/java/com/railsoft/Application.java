@@ -4,29 +4,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
+import com.railsoft.servlets.RowDeviceDataServlet;
 
-import com.railsoft.resources.RowDataDeviceResource;
 
 
 @SpringBootApplication
 public class Application implements CommandLineRunner{
 
+
     @Autowired
-    private ApplicationContext applicationContext; 
+    private CoAPServerInteraction coapServerInteraction;
+
+    @Autowired
+    private RowDeviceDataServlet rowDataDeviceServlet;
+
 
     @Override
     public void run(String... args){
-
-        CoAPServerRepresentative serverRepresentative = applicationContext.getBean(CoAPServerRepresentative.class);
-        RowDataDeviceResource coapResource = applicationContext.getBean(RowDataDeviceResource.class);
         
-        serverRepresentative.registeringResource(coapResource);
-        serverRepresentative.startServer();
+        coapServerInteraction.registeringServlet(rowDataDeviceServlet);
+        coapServerInteraction.startServer();
 
         System.out.println("----------CoAP Server is running!");
-
 
     }
 
